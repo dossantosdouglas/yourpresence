@@ -182,7 +182,7 @@
                 hearing from you 🙂</p>
             </div>
             <div class="my-5">
-              <form action="submit_form.php" method="post">
+              <form id="myForm" onsubmit="sendEmail(); return false;">
                 <div class="mb-6">
                   <label for="name" class="block mb-2 text-sm text-gray-600">Name</label>
                   <input type="text" id="name" name="name" placeholder="John Doe"
@@ -273,6 +273,31 @@
       </div>
     </div>
   </footer>
+  <script>
+    function sendEmail() {
+      let params = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value
+      };
+
+      emailjs.send('service_69wkhvg', 'template_e7icc8q', params)
+        .then(function (response) {
+          console.log('SUCCESS!', response.status, response.text);
+          alert('Email sent successfully!');
+        }, function (error) {
+          console.log('FAILED...', error);
+          alert('Failed to send email. Please try again later.');
+        });
+    }
+
+  </script>
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init("-bWQfYQkiTFxtiAOE"); // Replace 'YOUR_USER_ID' with your actual EmailJS user ID
+    })();
+  </script>
   <script type="module" src="./src/main.js"></script>
 </body>
 
